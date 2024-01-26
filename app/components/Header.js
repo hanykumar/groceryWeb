@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -8,12 +9,14 @@ const Header = () => {
         console.log(cart.length)
     }, [cart])
     return (
-        <nav className="flex justify-between bg-black p-3">
+        <nav className="flex justify-between bg-gray-600 p-3">
             <div>
-                icon
+                Hello Hany Kumar
             </div>
             <div>
-                menulist = {cart.length}
+            <Link href="/cart" className="underline border rounded p-2">
+                Cart items {cart.length}
+                </Link>
             </div>
         </nav>
     )
