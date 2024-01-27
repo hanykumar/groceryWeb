@@ -36,7 +36,7 @@ const Product = ({ product, cartItem }) => {
               <p className='text-gray-400'>${product.price.toFixed(2)}</p>
             </Link>
             {
-              product.quantity &&
+              product.quantity ?
               <div className='col-span-1 flex items-center justify-end'>
                 <button
                   className=' hover:bg-red-300 hover:text-red-800 mr-2 px-3 py-2 rounded' onClick={deleteFromCartHandler}>
@@ -51,7 +51,7 @@ const Product = ({ product, cartItem }) => {
                   className='bg-neutral-600 hover:bg-neutral-700 px-3 py-2 rounded' onClick={addToCartHandler}>
                   +
                 </button>
-              </div>
+              </div> : null
             }
           </div>
         </div>
