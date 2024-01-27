@@ -35,7 +35,7 @@ const Product = ({ product, cartItem }) => {
     <div className='flex flex-col p-5 rounded-lg bg-neutral-900 hover:bg-neutral-800' >
       <Link href={`/products/${product.id}`} className='grid grid-cols-4 gap-4 mb-3'>
         <div className='col-span-1 relative bg-neutral-800 rounded-lg flex justify-center' >
-          <Image alt={product.title} src={product.image} height={100} width={100}  />
+          <Image alt={product.title} src={product.image} height={100} width={100} className='object-contain' />
         </div>
         <div className='col-span-3'>
           <div className='text-left'>
@@ -47,14 +47,14 @@ const Product = ({ product, cartItem }) => {
       <div className='grid grid-cols-4 gap-1'>
         {
           !cartItem ?
-          <div className='col-span-3 text-left text-sm line-clamp-2 text-gray-300'>{product.description}</div>
-          :<div className="col-span-1"></div>
+            <div className='col-span-3 text-left text-sm line-clamp-2 text-gray-300'>{product.description}</div>
+            : <div className="col-span-1"></div>
         }
         {product.quantity ? (
           <div className='col-span-1 flex items-center'>
             <button
               className=' hover:bg-red-300 hover:text-red-800 mr-2 px-3 py-2 rounded' onClick={deleteFromCartHandler}>
-              <FontAwesomeIcon icon={faTrashCan} color="neutral"  />
+              <FontAwesomeIcon icon={faTrashCan} color="neutral" />
             </button>
             <button
               className='bg-neutral-600 hover:bg-neutral-700 px-3 py-2 rounded' onClick={removeFromCartHandler}>
@@ -69,9 +69,11 @@ const Product = ({ product, cartItem }) => {
 
           </div>
         ) : (
-          <button className='bg-neutral-700 text-white hover:bg-neutral-600 rounded col-span-1' onClick={addToCartHandlerAndNavigate}>
-            Add to Cart
-          </button>
+          <div className='col-span-1'>
+            <button className='bg-neutral-700 text-white hover:bg-neutral-600 rounded ' onClick={addToCartHandlerAndNavigate}>
+              Add to Cart
+            </button>
+          </div>
         )}
       </div>
     </div>
