@@ -1,6 +1,5 @@
 'use client';
 import { useDispatch, useSelector } from 'react-redux';
-import Header from './components/Header'
 import ProductList from './components/ProductList'
 import { useEffect } from 'react';
 import { fetchProducts } from './service/productService';
@@ -13,9 +12,9 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex min-h-screen flex-col">
-      <Header />
+    <div>
+      <div className='text-2xl mb-5'>Products</div>
       <ProductList products={products} />
-    </main>
+    </div>
   );
 }
