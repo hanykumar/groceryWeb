@@ -22,7 +22,7 @@ const Cart = () => {
             {
                 cart.length == 0 ? <div className="mt-5">Please add products to cart!</div> :
                     <div>
-                        <ProductList products={cart.filter(item => item.quantity > 0)} />
+                        <ProductList cartItem={true} products={cart.filter(item => item.quantity > 0)} />
 
                         <div className="mt-7 px-5 py-2 pb-5 rounded-lg bg-neutral-700 flex flex-col">
                             <div className="flex justify-between items-center my-1">

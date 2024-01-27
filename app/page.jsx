@@ -16,7 +16,7 @@ export default function Home() {
   }, [dispatch, products]);
 
   const memoizedProductList = useMemo(() => {
-    return <ProductList products={products} />;
+    return <ProductList cartItem={false} products={products} />;
   }, [products, loading]);
 
   return (

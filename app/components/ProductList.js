@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Product from './Product';
 
-const ProductList = ({ products }) => {
+const ProductList = ({ products , cartItem}) => {
   const productsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -17,9 +17,9 @@ const ProductList = ({ products }) => {
 
   return (
     <div>
-      <div className="grid grid-cols-2 gap-5">
+      <div className="grid lg:grid-cols-2 grid-cols-1 gap-5">
         {currentProducts.map((product, index) => (
-          <Product key={index} product={product} />
+          <Product cartItem={cartItem} key={index} product={product} />
         ))}
       </div>
 

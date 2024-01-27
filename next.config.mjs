@@ -2,8 +2,16 @@
 const nextConfig = {
     reactStrictMode: false,
     images: {
-        domains: ['fakestoreapi.com']
-    }
+        remotePatterns: [
+            {
+              protocol: 'https',
+              hostname: 'fakestoreapi.com',
+              port: '',
+              pathname: '/img/**', // Adjust the pathname pattern as needed
+            },
+          ],
+    },
+
 };
 
 export default nextConfig;

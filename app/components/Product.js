@@ -6,8 +6,9 @@ import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDeleteLeft } from '@fortawesome/free-solid-svg-icons/faDeleteLeft';
 import { faTrash, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
 
-const Product = ({ product }) => {
+const Product = ({ product, cartItem }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const addToCartHandler = (e) => {
@@ -31,10 +32,10 @@ const Product = ({ product }) => {
   }
 
   return (
-    <button className='flex flex-col p-5 rounded-lg bg-neutral-900 hover:bg-neutral-800' onClick={getProduct}>
-      <div className='grid grid-cols-4 gap-4 mb-3'>
-        <div className='col-span-1 relative bg-neutral-800 rounded-lg' style={{ height: 100 }}>
-          <Image priority={true} alt={product.title} src={product.image} layout={'fill'} objectFit={'contain'} />
+    <div className='flex flex-col p-5 rounded-lg bg-neutral-900 hover:bg-neutral-800' >
+      <Link href={`/products/${product.id}`} className='grid grid-cols-4 gap-4 mb-3'>
+        <div className='col-span-1 relative bg-neutral-800 rounded-lg flex justify-center' >
+          <Image alt={product.title} src={product.image} height={100} width={100}  />
         </div>
         <div className='col-span-3'>
           <div className='text-left'>
@@ -42,11 +43,15 @@ const Product = ({ product }) => {
             <p className='text-gray-400'>${product.price.toFixed(2)}</p>
           </div>
         </div>
-      </div>
+      </Link>
       <div className='grid grid-cols-4 gap-1'>
-        <div className='col-span-3 text-left text-sm line-clamp-2 text-gray-300'>{product.description}</div>
+        {
+          !cartItem ?
+          <div className='col-span-3 text-left text-sm line-clamp-2 text-gray-300'>{product.description}</div>
+          :<div className="col-span-1"></div>
+        }
         {product.quantity ? (
-          <div className='fcol-span-1 flex items-center'>
+          <div className='col-span-1 flex items-center'>
             <button
               className=' hover:bg-red-300 hover:text-red-800 mr-2 px-3 py-2 rounded' onClick={deleteFromCartHandler}>
               <FontAwesomeIcon icon={faTrashCan} color="neutral"  />
@@ -69,7 +74,7 @@ const Product = ({ product }) => {
           </button>
         )}
       </div>
-    </button>
+    </div>
 
   );
 };

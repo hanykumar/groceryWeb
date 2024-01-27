@@ -29,8 +29,11 @@ const ProductDetails = () => {
     }
 
     useEffect(() => {
-        dispatch(fetchProductDetails(params.id))
-    }, [params.id])
+        const productId = params.id;
+        if (!product || product.id !== productId) {
+            dispatch(fetchProductDetails(productId));
+        }
+    }, [params.id]);
 
     if (loading) {
        return <div className="mt-5 pt-5">
@@ -41,11 +44,11 @@ const ProductDetails = () => {
         if (product)
             return (
                 <div className='flex flex-col mt-5 rounded-lg'>
-                    <div className='grid grid-cols-8 gap-5 mb-3'>
-                        <div className='col-span-3 relative bg-neutral-700 rounded-lg' style={{ height: '400px' }}>
+                    <div className='grid lg:grid-cols-8 gap-5 mb-3'>
+                        <div className='lg:col-span-3 relative bg-neutral-700 rounded-lg' style={{ height: '400px' }}>
                             <Image priority={true} alt={product.title} src={product.image} layout={'fill'} objectFit={'contain'} />
                         </div>
-                        <div className='col-span-5'>
+                        <div className='lg:col-span-5'>
                             <h3 className='text-xl text-gray-200'>{product.title}</h3>
                             <p className='text-gray-400'>${product?.price?.toFixed(2)}</p>
                             <div className='col-span-1 text-gray-300 mt-4'>{product.description}</div>
