@@ -17,7 +17,7 @@ export default function Home() {
 
   const memoizedProductList = useMemo(() => {
     return <ProductList products={products} />;
-  }, []);
+  }, [products, loading]);
 
   return (
     <div>
