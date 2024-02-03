@@ -1,14 +1,16 @@
 'use client';
 import { useSelector } from "react-redux";
 import ProductList from '../components/ProductList'
+import { StoreState } from "../store/store";
+import ProductModel from "../model/ProductModel";
 
 const Cart = () => {
-    const cart = useSelector(state => state.productReducer.cart);
+    const cart = useSelector((state: StoreState) => state.productReducer.cart);
     const deliveryCharges = 2;
     function calculateTotalPrice() {
         let totalPrice = 0;
 
-        cart.forEach((item) => {
+        cart.forEach((item: ProductModel) => {
             const itemTotal = item.price * item.quantity;
             totalPrice += itemTotal;
         });
@@ -22,7 +24,7 @@ const Cart = () => {
             {
                 cart.length == 0 ? <div className="mt-5">Please add products to cart!</div> :
                     <div>
-                        <ProductList cartItem={true} products={cart.filter(item => item.quantity > 0)} />
+                        <ProductList isCartItem={true} products={cart.filter((item: { quantity: number; }) => item.quantity > 0)} />
 
                         <div className="mt-7 px-5 py-2 pb-5 rounded-lg bg-neutral-700 flex flex-col">
                             <div className="flex justify-between items-center my-1">

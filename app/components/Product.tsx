@@ -1,30 +1,47 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { ButtonHTMLAttributes, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../store/productSlice'
 import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
+import Snackbar from './SnackBar'
+import ProductModel from '../model/ProductModel';
+import { useAppDispatch } from '../store/store';
 
-const Product = ({ product, cartItem }) => {
-  const dispatch = useDispatch();
-  const addToCartHandler = (e) => {
-    dispatch(addToCart({ product: product, quantity: 1, operation: 'add' }))
+interface props {
+  product: ProductModel,
+  isCartItem: boolean
+}
+
+const Product: React.FC<props> = ({ product, isCartItem }) => {
+  const dispatch = useAppDispatch();
+  const [showSnackbar, setShowSnackbar] = useState<Boolean>(false);
+  const addToCartHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    dispatch(addToCart({ product: product, quantity: 1, operation: 'add' }));
+    setShowSnackbar(true)
   }
-  const removeFromCartHandler = (e) => {
+  const removeFromCartHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     dispatch(addToCart({ product: product, quantity: 1, operation: 'remove' }))
   }
   // const addToCartHandlerAndNavigate = (e) => {
   //   dispatch(addToCart({ product: product, quantity: 1, operation: 'add' }))
   // }
-  const deleteFromCartHandler = (e) => {
+  const deleteFromCartHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     dispatch(addToCart({ product: product, quantity: product.quantity, operation: 'remove' }))
   }
 
 
   return (
     <div className='flex flex-col p-5 rounded-lg bg-neutral-900 hover:bg-neutral-800' >
+      <div >
+
+      {showSnackbar ? 
+      <Snackbar title="Added" description="Item has been added to cart" 
+      closeSnackBar={() => setShowSnackbar(false)}/>  : null
+    }
+    </div>
       <div className='grid grid-cols-4 gap-4 mb-3'>
         <Link href={`/products/${product.id}`} className='col-span-1 relative bg-neutral-800 rounded-lg flex justify-center' >
           <Image alt={product.title} src={product.image} height={100} width={100} className='object-contain' />
@@ -58,7 +75,7 @@ const Product = ({ product, cartItem }) => {
       </div>
       <div className='grid grid-cols-4 gap-1'>
         {
-          !cartItem ?
+          !isCartItem ?
             <div className='col-span-3 text-left text-sm line-clamp-3 text-gray-300'>{product.description}</div>
             : <div className="col-span-1"></div>
         }

@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProductList from './components/ProductList';
 import { useEffect, useMemo } from 'react';
 import { fetchProducts } from './service/productService';
+import { StoreState, useAppDispatch } from './store/store';
 
 export default function Home() {
-  const products = useSelector((state) => state.productReducer.products);
-  const loading = useSelector((state) => state.productReducer.loading);
-  const dispatch = useDispatch();
+  const products = useSelector((state: StoreState) => state.productReducer.products);
+  const loading = useSelector((state: StoreState) => state.productReducer.loading);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (!products.length) {
@@ -16,8 +17,8 @@ export default function Home() {
   }, [dispatch, products]);
 
   const memoizedProductList = useMemo(() => {
-    return <ProductList cartItem={false} products={products} />;
-  }, [products, loading]);
+    return <ProductList isCartItem={false} products={products} />;
+  }, [products]);
 
   return (
     <div>

@@ -5,9 +5,10 @@ import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons/faUser";
+import { StoreState } from "../store/store";
 
 const Header = () => {
-    const cart = useSelector(state => state.productReducer.cart);
+    const cart = useSelector((state: StoreState) => state.productReducer.cart);
     const router = usePathname();
     const title = () => {
         if (router == '/cart')
