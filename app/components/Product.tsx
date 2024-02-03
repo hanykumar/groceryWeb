@@ -1,6 +1,5 @@
 import Image from 'next/image';
-import React, { ButtonHTMLAttributes, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
 import { addToCart } from '../store/productSlice'
 import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

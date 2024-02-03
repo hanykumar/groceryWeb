@@ -1,22 +1,24 @@
 // Import necessary dependencies
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Product from './Product';
 import ProductModel from '../model/ProductModel';
+import { useProductsContext } from '../contextProducts';
 
 interface props {
-  products: ProductModel[],
+  // products: ProductModel[],
   isCartItem: boolean
 }
 
-const ProductList = ({ products , isCartItem}: props) => {
+const ProductList = ({ isCartItem}: props) => {
+  const {products } = useProductsContext();
   const productsPerPage = 5;
+
   const [currentPage, setCurrentPage] = useState(1);
 
   const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;
 
   const currentProducts = products.slice(startIndex, endIndex);
-
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
   };

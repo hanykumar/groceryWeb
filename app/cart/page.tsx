@@ -3,10 +3,12 @@ import { useSelector } from "react-redux";
 import ProductList from '../components/ProductList'
 import { StoreState } from "../store/store";
 import ProductModel from "../model/ProductModel";
+import { useProductsContext } from "../contextProducts";
 
 const Cart = () => {
     const cart = useSelector((state: StoreState) => state.productReducer.cart);
     const deliveryCharges = 2;
+    const { setProducts } = useProductsContext();
     function calculateTotalPrice() {
         let totalPrice = 0;
 
